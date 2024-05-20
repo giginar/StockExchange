@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Service
 public class StockService {
-    @Autowired(required = false)
+    @Autowired
     private StockRepository stockRepository;
 
     public Stock createStock(Stock stock) {

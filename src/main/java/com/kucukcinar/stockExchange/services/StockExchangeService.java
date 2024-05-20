@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StockExchangeService {
-    @Autowired(required = false)
+    @Autowired
     private StockExchangeRepository stockExchangeRepository;
 
-    @Autowired(required = false)
+    @Autowired
     private StockRepository stockRepository;
 
     public StockExchange getStockExchangeByName(String name) {

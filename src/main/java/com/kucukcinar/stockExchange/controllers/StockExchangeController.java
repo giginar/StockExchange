@@ -1,7 +1,9 @@
 package com.kucukcinar.stockExchange.controllers;
 
+import com.kucukcinar.stockExchange.dto.StockExchangeDTO;
 import com.kucukcinar.stockExchange.entities.Stock;
 import com.kucukcinar.stockExchange.entities.StockExchange;
+import com.kucukcinar.stockExchange.mappers.StockExchangeMapper;
 import com.kucukcinar.stockExchange.services.StockExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,17 +21,20 @@ public class StockExchangeController {
     private StockExchangeService stockExchangeService;
 
     @GetMapping("/{name}")
-    public StockExchange getStockExchange(@PathVariable String name) {
-        return stockExchangeService.getStockExchangeByName(name);
+    public StockExchangeDTO getStockExchange(@PathVariable String name) {
+        StockExchange stockExchange = stockExchangeService.getStockExchangeByName(name);
+        return StockExchangeMapper.toDTO(stockExchange);
     }
 
     @PostMapping("/{name}")
-    public StockExchange addStockToExchange(@PathVariable String name, @RequestBody Long stockId) {
-        return stockExchangeService.addStockToExchange(name, stockId);
+    public StockExchangeDTO addStockToExchange(@PathVariable String name, @RequestBody Long stockId) {
+        StockExchange stockExchange = stockExchangeService.addStockToExchange(name, stockId);
+        return StockExchangeMapper.toDTO(stockExchange);
     }
 
     @DeleteMapping("/{name}")
-    public StockExchange removeStockFromExchange(@PathVariable String name, @RequestBody Long stockId) {
-        return stockExchangeService.removeStockFromExchange(name, stockId);
+    public StockExchangeDTO removeStockFromExchange(@PathVariable String name, @RequestBody Long stockId) {
+        StockExchange stockExchange = stockExchangeService.removeStockFromExchange(name, stockId);
+        return StockExchangeMapper.toDTO(stockExchange);
     }
 }
