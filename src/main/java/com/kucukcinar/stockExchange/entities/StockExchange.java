@@ -9,12 +9,22 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class StockExchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,46 +43,4 @@ public class StockExchange {
             inverseJoinColumns = @JoinColumn(name = "stock_id")
     )
     private List<Stock> stocks = new ArrayList<>();
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isLiveInMarket() {
-        return liveInMarket;
-    }
-
-    public void setLiveInMarket(boolean liveInMarket) {
-        this.liveInMarket = liveInMarket;
-    }
-
-    public List<Stock> getStocks() {
-        return stocks;
-    }
-
-    public void setStocks(List<Stock> stocks) {
-        this.stocks = stocks;
-    }
 }
