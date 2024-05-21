@@ -1,4 +1,4 @@
-package com.kucukcinar.stockExchange.dto;
+package com.kucukcinar.stockExchange.dto.response;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class StockExchangeDTO {
     private String name;
     private String description;
     private boolean liveInMarket;
-    private List<StockDTO> stocks;
+    private List<StockResponseDTO> stocks;
 
     public Long getId() {
         return id;
@@ -41,11 +41,11 @@ public class StockExchangeDTO {
         this.liveInMarket = liveInMarket;
     }
 
-    public List<StockDTO> getStocks() {
+    public List<StockResponseDTO> getStocks() {
         return stocks;
     }
 
-    public void setStocks(List<StockDTO> stocks) {
+    public void setStocks(List<StockResponseDTO> stocks) {
         this.stocks = stocks;
     }
 }
