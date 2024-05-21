@@ -20,18 +20,38 @@ public class StockExchangeController {
     @Autowired
     private StockExchangeService stockExchangeService;
 
+    /**
+     * Gets stock exchange.
+     *
+     * @param name the name
+     * @return the stock exchange
+     */
     @GetMapping("/{name}")
     public StockExchangeResponseDTO getStockExchange(@PathVariable String name) {
         StockExchange stockExchange = stockExchangeService.getStockExchangeByName(name);
         return StockExchangeMapper.toResponseDTO(stockExchange);
     }
 
+    /**
+     * Add stock to exchange stock exchange response dto.
+     *
+     * @param name       the name
+     * @param requestDTO the request dto
+     * @return the stock exchange response dto
+     */
     @PostMapping("/{name}")
     public StockExchangeResponseDTO addStockToExchange(@PathVariable String name, @RequestBody StockExchangeStockRequestDTO requestDTO) {
         StockExchange stockExchange = stockExchangeService.addStockToExchange(name, requestDTO.getStockId());
         return StockExchangeMapper.toResponseDTO(stockExchange);
     }
 
+    /**
+     * Remove stock from exchange stock exchange response dto.
+     *
+     * @param name       the name
+     * @param requestDTO the request dto
+     * @return the stock exchange response dto
+     */
     @DeleteMapping("/{name}")
     public StockExchangeResponseDTO removeStockFromExchange(@PathVariable String name, @RequestBody StockExchangeStockRequestDTO requestDTO) {
         StockExchange stockExchange = stockExchangeService.removeStockFromExchange(name, requestDTO.getStockId());

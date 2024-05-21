@@ -20,18 +20,35 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
+    /**
+     * Create stock stock response dto.
+     *
+     * @param stockRequestDTO the stock request dto
+     * @return the stock response dto
+     */
     @PostMapping
     public StockResponseDTO createStock(@RequestBody StockRequestDTO stockRequestDTO) {
         Stock stock = stockService.createStock(StockMapper.toEntity(stockRequestDTO));
         return StockMapper.toResponseDTO(stock);
     }
 
+    /**
+     * Update stock price stock response dto.
+     *
+     * @param stockUpdateRequestDTO the stock update request dto
+     * @return the stock response dto
+     */
     @PutMapping
     public StockResponseDTO updateStockPrice(@RequestBody StockUpdateRequestDTO stockUpdateRequestDTO) {
         Stock stock = stockService.updateStockPrice(stockUpdateRequestDTO.getId(), stockUpdateRequestDTO.getCurrentPrice());
         return StockMapper.toResponseDTO(stock);
     }
 
+    /**
+     * Delete stock.
+     *
+     * @param stockId the stock id
+     */
     @DeleteMapping
     public void deleteStock(@RequestBody Long stockId) {
         stockService.deleteStock(stockId);

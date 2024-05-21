@@ -16,11 +16,24 @@ public class StockExchangeService {
     @Autowired
     private StockRepository stockRepository;
 
+    /**
+     * Gets stock exchange by name.
+     *
+     * @param name the name
+     * @return the stock exchange object
+     */
     public StockExchange getStockExchangeByName(String name) {
         return stockExchangeRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("StockExchange not found: " + name));
     }
 
+    /**
+     * Add stock to exchange stock exchange.
+     *
+     * @param exchangeName the exchange name
+     * @param stockId      the stock id
+     * @return the stock exchange object
+     */
     public StockExchange addStockToExchange(String exchangeName, Long stockId) {
         StockExchange stockExchange = getStockExchangeByName(exchangeName);
         Stock stock = stockRepository.findById(stockId)
@@ -30,6 +43,13 @@ public class StockExchangeService {
         return stockExchangeRepository.save(stockExchange);
     }
 
+    /**
+     * Remove stock from exchange stock exchange.
+     *
+     * @param exchangeName the exchange name
+     * @param stockId      the stock id
+     * @return the stock exchange object
+     */
     public StockExchange removeStockFromExchange(String exchangeName, Long stockId) {
         StockExchange stockExchange = getStockExchangeByName(exchangeName);
         Stock stock = stockRepository.findById(stockId)
