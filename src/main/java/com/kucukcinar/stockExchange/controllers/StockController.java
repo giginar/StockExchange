@@ -1,6 +1,8 @@
 package com.kucukcinar.stockExchange.controllers;
 
-import com.kucukcinar.stockExchange.dto.StockDTO;
+import com.kucukcinar.stockExchange.dto.request.StockRequestDTO;
+import com.kucukcinar.stockExchange.dto.request.StockUpdateRequestDTO;
+import com.kucukcinar.stockExchange.dto.response.StockResponseDTO;
 import com.kucukcinar.stockExchange.entities.Stock;
 import com.kucukcinar.stockExchange.mappers.StockMapper;
 import com.kucukcinar.stockExchange.services.StockService;
@@ -19,20 +21,15 @@ public class StockController {
     private StockService stockService;
 
     @PostMapping
-    public StockDTO createStock(@RequestBody StockDTO stockDTO) {
-        Stock stock = new Stock();
-        stock.setName(stockDTO.getName());
-        stock.setDescription(stockDTO.getDescription());
-        stock.setCurrentPrice(stockDTO.getCurrentPrice());
-        stock.setLastUpdate(stockDTO.getLastUpdate());
-        stock = stockService.createStock(stock);
-        return StockMapper.toDTO(stock);
+    public StockResponseDTO createStock(@RequestBody StockRequestDTO stockRequestDTO) {
+        Stock stock = stockService.createStock(StockMapper.toEntity(stockRequestDTO));
+        return StockMapper.toResponseDTO(stock);
     }
 
     @PutMapping
-    public StockDTO updateStockPrice(@RequestBody StockDTO stockDTO) {
-        Stock stock = stockService.updateStockPrice(stockDTO.getId(), stockDTO.getCurrentPrice());
-        return StockMapper.toDTO(stock);
+    public StockResponseDTO updateStockPrice(@RequestBody StockUpdateRequestDTO stockUpdateRequestDTO) {
+        Stock stock = stockService.updateStockPrice(stockUpdateRequestDTO.getId(), stockUpdateRequestDTO.getCurrentPrice());
+        return StockMapper.toResponseDTO(stock);
     }
 
     @DeleteMapping

@@ -1,7 +1,7 @@
 package com.kucukcinar.stockExchange.controllers;
 
-import com.kucukcinar.stockExchange.dto.StockExchangeDTO;
-import com.kucukcinar.stockExchange.entities.Stock;
+import com.kucukcinar.stockExchange.dto.request.StockExchangeStockRequestDTO;
+import com.kucukcinar.stockExchange.dto.response.StockExchangeResponseDTO;
 import com.kucukcinar.stockExchange.entities.StockExchange;
 import com.kucukcinar.stockExchange.mappers.StockExchangeMapper;
 import com.kucukcinar.stockExchange.services.StockExchangeService;
@@ -21,20 +21,20 @@ public class StockExchangeController {
     private StockExchangeService stockExchangeService;
 
     @GetMapping("/{name}")
-    public StockExchangeDTO getStockExchange(@PathVariable String name) {
+    public StockExchangeResponseDTO getStockExchange(@PathVariable String name) {
         StockExchange stockExchange = stockExchangeService.getStockExchangeByName(name);
-        return StockExchangeMapper.toDTO(stockExchange);
+        return StockExchangeMapper.toResponseDTO(stockExchange);
     }
 
     @PostMapping("/{name}")
-    public StockExchangeDTO addStockToExchange(@PathVariable String name, @RequestBody Long stockId) {
-        StockExchange stockExchange = stockExchangeService.addStockToExchange(name, stockId);
-        return StockExchangeMapper.toDTO(stockExchange);
+    public StockExchangeResponseDTO addStockToExchange(@PathVariable String name, @RequestBody StockExchangeStockRequestDTO requestDTO) {
+        StockExchange stockExchange = stockExchangeService.addStockToExchange(name, requestDTO.getStockId());
+        return StockExchangeMapper.toResponseDTO(stockExchange);
     }
 
     @DeleteMapping("/{name}")
-    public StockExchangeDTO removeStockFromExchange(@PathVariable String name, @RequestBody Long stockId) {
-        StockExchange stockExchange = stockExchangeService.removeStockFromExchange(name, stockId);
-        return StockExchangeMapper.toDTO(stockExchange);
+    public StockExchangeResponseDTO removeStockFromExchange(@PathVariable String name, @RequestBody StockExchangeStockRequestDTO requestDTO) {
+        StockExchange stockExchange = stockExchangeService.removeStockFromExchange(name, requestDTO.getStockId());
+        return StockExchangeMapper.toResponseDTO(stockExchange);
     }
 }
